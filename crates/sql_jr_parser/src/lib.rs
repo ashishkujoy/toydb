@@ -1,6 +1,7 @@
 mod common_parsers;
 mod create_statement;
+mod error;
 mod insert_statement;
-mod query;
+pub mod query;
 mod select_statement;
-mod types;
+pub mod types;

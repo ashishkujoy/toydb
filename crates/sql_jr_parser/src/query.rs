@@ -76,12 +76,9 @@ VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway
         )
     }
 
-
-
     #[test]
     fn test_parse_create_query() {
-        let raw_query =
-            "CREATE TABLE Persons (PersonID int, 
+        let raw_query = "CREATE TABLE Persons (PersonID int, 
             LastName string);";
 
         let (_, query) = SqlQuery::parse_from_raw(&raw_query).unwrap();

@@ -5,7 +5,9 @@ edition = "2021"
 
 [dependencies]
 error-tree = "0.3.6"
+miette.workspace = true
 nom = "7.1.3"
 nom-supreme = "0.8.0"
 nom_locate = "4.2.0"
 serde = { workspace = true, features = ["derive"] }
+thiserror.workspace = true

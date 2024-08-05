@@ -1,5 +1,7 @@
+use miette::GraphicalReportHandler;
 use rustyline::error::ReadlineError;
 use rustyline::{DefaultEditor, Result};
+use sql_jr_parser::{query::SqlQuery, types::Parse};
 
 const HISTORY_FILE: &str = "./history.txt";
 
@@ -15,7 +17,16 @@ fn main() -> Result<()> {
         match readline {
             Ok(line) => {
                 rl.add_history_entry(line.as_str())?;
-                println!("Line: {}", line);
+                match SqlQuery::parse_format_error(line.as_ref()) {
+                    Ok(q) => println!("{q:?}"),
+                    Err(e) => {
+                        let mut s = String::new();
+                        GraphicalReportHandler::new()
+                            .render_report(&mut s, &e)
+                            .unwrap();
+                        println!("{s}");
+                    }
+                }
             }
             Err(ReadlineError::Interrupted) => {
                 println!("CTRL-C");
