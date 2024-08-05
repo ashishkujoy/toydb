@@ -14,10 +14,6 @@ pub(crate) fn identifier(i: RawSpan) -> ParserResult<String> {
     map(take_aplphanumeric, to_string)(i)
 }
 
-fn is_not_quote(c: char) -> bool {
-    c != '\'' && c != '"'
-}
-
 pub(crate) fn parse_single_quote_str(i: RawSpan) -> ParserResult<String> {
     map(
         delimited(tag("'"), take_while(|c| c != '\''), tag("'")),
